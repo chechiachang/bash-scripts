@@ -18,3 +18,7 @@ golang::install(){
 golang::govendor(){
   go get -u github.com/kardianos/govendor
 }
+
+golang::gocode(){
+  go get -u github.com/nsf/gocode
+}
