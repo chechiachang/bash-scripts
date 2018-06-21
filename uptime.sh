@@ -10,9 +10,9 @@ uptime::curl(){
     local uptime_method=$1; shift;
     local body=$*
 
-    if [[ -z UPTIME_API_KEY ]]; then
+    if [[ -z ${UPTIME_API_KEY} ]]; then
       echo "UPTIME_API_KEY is required but not found."
-      exit 1
+      return 1
     fi
 
     curl -X ${http_method} \
