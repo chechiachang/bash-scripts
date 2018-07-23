@@ -5,7 +5,9 @@ A bash scripts collections
 
 # Usage
 
-Clone & source 
+1. Clone & source 
+
+2. Copy base.sh as template
 
 ##### Example
 
