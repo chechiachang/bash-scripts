@@ -33,6 +33,6 @@ gcp::gcr::create_gcr_key(){
   declare sa_name=$1
 
   sa_email=$(gcp::iam::serviceaccount::create ${sa_name})
-  gcp::iam::serviceaccount::create_key ${sa_email} "${sa_name}.json"
+  gcp::iam::serviceaccount::create_key ${sa_email} "${sa_name}-gcr.json"
   gcp::iam::bind_policy ${sa_email} "roles/storage.objectViewer"
 }
