@@ -1,12 +1,15 @@
 #!/bin/bash
 
+#https://stackoverflow.com/questions/592620/how-to-check-if-a-program-exists-from-a-bash-script
 check_aws_cli(){
+
   if hash aws 2>/dev/null; then
     echo "Using aws-cli $(which aws)"
   else
     echo "Failed to find command aws. Install with 'pip install aws-cli'"
     exit 1
   fi
+
 }
 
 aws::instance::run(){
