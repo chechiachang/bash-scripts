@@ -1,5 +1,14 @@
 #!/bin/bash
 
+check_aws_cli(){
+  if hash aws 2>/dev/null; then
+    echo "Using aws-cli $(which aws)"
+  else
+    echo "Failed to find command aws. Install with 'pip install aws-cli'"
+    exit 1
+  fi
+}
+
 aws::instance::run(){
   
   BLOCK_DEVICE_MAPPING='DeviceName=/dev/sdb,VirtualName=/dev/sdb,Ebs={Encrypted=false,DeleteOnTermination=false,VolumeSize=600,VolumeType=sc1}'
