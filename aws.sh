@@ -39,3 +39,33 @@ aws::instance::run(){
   
   echo "EC2 instances creating with ips: ${instance_ids[@]}"
 }
+
+# The instances require some time to initialize. Wait until all instances state are 'running'.
+aws::instance::wait_ready(){
+  local tmp_file="/tmp/ec2-nodes.json"
+
+  aws ec2 describe-instances --filters '[{"Name":"tag:name","Values":["aurora"]},{"Name":"instance-state-name","Values":["running"]}]' > ${tmp_file}
+  declare -a private_ips=($(cat ${tmp_file} | jq -r .Reservations[].Instances[].PrivateIpAddress))
+  declare -a public_ips=($(cat ${tmp_file} | jq -r .Reservations[].Instances[].PublicIpAddress))
+
+  counter=0
+  while [[ -z ${private_ips[0]} ]]; do
+
+    echo "Waiting for EC2 instance running. Retries ${counter}"
+
+    aws ec2 describe-instances --filters '[{"Name":"tag:name","Values":["aurora"]},{"Name":"instance-state-name","Values":["running"]}]' > ${tmp_file}
+    declare -a private_ips=($(cat ${tmp_file} | jq -r .Reservations[].Instances[].PrivateIpAddress))
+    declare -a public_ips=($(cat ${tmp_file} | jq -r .Reservations[].Instances[].PublicIpAddress))
+
+    if [[ "${counter}" -gt 10 ]]; then
+      echo "Waiting instance timeout after ${counter} reties"
+      exit 1
+    fi
+
+    counter=$(( ${counter} + 1 ))
+    sleep 5
+  done
+
+  rm ${tmp_file}
+  echo "Using instance private ip: ${private_ips[@]}, public ip: ${public_ips[@]}"
+}
