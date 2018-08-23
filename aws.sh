@@ -49,7 +49,7 @@ aws::instance::wait_ready(){
   declare -a public_ips=($(cat ${tmp_file} | jq -r .Reservations[].Instances[].PublicIpAddress))
 
   counter=0
-  while [[ -z ${public_ips[0]} ]]; do
+  while [[ -z ${public_ips[0]} || ${#public_ips[@]} != ${COUNT} ]]; do
 
     echo "Waiting for EC2 instance running. Retries ${counter}"
 
