@@ -13,8 +13,7 @@ httpie::install(){
 
 kubectl::secret::registry::create(){
 
-  gcr_user_email=$1
-  gcr_key_file=$2
+  declare gcr_user_email=$1 gcr_key_file=$2
   
   kubectl create secret docker-registry gcr-key \
     --docker-server=https://asia.gcr.io \
@@ -54,7 +53,7 @@ EOF
 
 kubectl::service::debug(){
 
-  service_name=$1
+  declare service_name=$1
 
   kubectl::busybox::apply
 
