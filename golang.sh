@@ -1,8 +1,8 @@
 #!/bin/bash
 #
 
-# Dependencies
-#   system.sh
+__DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+source ${__DIR}/system.sh
 
 GO_VERSION=1.10.2
 
@@ -15,10 +15,10 @@ golang::install(){
   sudo tar -C /usr/local -xzf ${file}
 }
 
-golang::govendor(){
+golang::govendor::install(){
   go get -u github.com/kardianos/govendor
 }
 
-golang::gocode(){
+golang::gocode:install(){
   go get -u github.com/nsf/gocode
 }

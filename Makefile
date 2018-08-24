@@ -1,2 +1,2 @@
 bats:
-	bats *.bats
+	bats .
