@@ -1,13 +1,10 @@
 #!/bin/bash
 
+source system.sh
+
 httpie::install(){
 
-  if hash http 2>/dev/null; then
-    echo "Using aws-cli $(which http)"
-  else
-    echo "Failed to find command aws. Install with 'sudo apt install httpie'"
-    exit 1
-  fi
+  system::check_command http
 
 }
 
