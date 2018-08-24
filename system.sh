@@ -5,7 +5,7 @@
 #   Darwin
 
 system::get_os(){
-  os_info=$(uname -o)
+  os_info=$(uname -a)
   if [[ ${os_info} = *Linux* ]]; then
     os="linux"
   elif [[ ${os_info} = *Darwin* ]]; then
