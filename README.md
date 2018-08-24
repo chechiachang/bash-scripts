@@ -1,24 +1,15 @@
-Bash scripts
+Bash scripts tool box
 ===
 
-A bash scripts collections
+A bash scripts utilities collections
 
 # Usage
 
-1. Clone & source 
-
-2. Copy base.sh as template
-
-##### Example
-
 ```
-# clone & source
-git clone git@github.com:chechiachang/bash-scripts.git
-source bash-scripts/system.sh
+git clone https://github.com/chechiachang/bash-scripts ~/bash-scripts
+source ~/bash-scripts/*.sh
 
-# Invoke functions
-system::get_os
-echo ${os}
+httpie::get http://httpbin.org/get
 ```
 
 # TODO
