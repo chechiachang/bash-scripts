@@ -21,6 +21,6 @@ system::get_os
 echo ${os}
 ```
 
-# Issue
+# TODO
 
-Check dependent scripts
+- [ ] Check dependent scripts
