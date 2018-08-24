@@ -2,11 +2,9 @@
 # References
 # - https://kubernetes.io/docs/reference/kubectl/cheatsheet/
 
-POD_NAME=$(kubectl get pod -o json | jq -r '.items[] | select( .metadata.name | contains("server-name")) | .metadata.name')
+httpie::install(){
 
-kubectl::pod::wait_running(){
-
-  pod_name=$1
+  system::check_command kubectl
 
 }
 
@@ -20,6 +18,14 @@ kubectl::secret::registry::create(){
     --docker-username=_json_key \
     --docker-email=${gcr_user_email} \
     --docker-password=$(cat ${gcr_key_file})
+
+}
+
+kubectl::pod::get(){
+
+  declare pod_name=$1
+  kubectl get pod -o json | jq -r '.items[] | select( .metadata.name | contains("'${pod_name}'")) | .metadata.name'
+
 }
 
 kubectl::busybox::apply(){
@@ -44,6 +50,7 @@ EOF
 }
 
 kubectl::service::debug(){
+
   service_name=$1
 
   kubectl::busybox::apply
