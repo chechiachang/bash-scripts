@@ -23,3 +23,13 @@ system::get_machine(){
   fi
   export machine=${machine}
 }
+
+system::check_command(){
+  declare cmd=$1
+  if hash ${cmd} 2>/dev/null; then
+    echo "Using ${cmd} $(which ${cmd})"
+  else
+    echo "Failed to find command ${cmd}."
+    exit 1
+  fi
+}
