@@ -1,0 +1,17 @@
+language: generic
+
+sudo: enabled
+
+addons:
+  apt:
+    packages:
+      - cmake
+
+before_install:
+  git clone https://github.com/sstephenson/bats.git ${HOME}/bats
+  cd ${HOME}/bats
+  ./install.sh /usr/local
+
+install:
+  make bats
+  
