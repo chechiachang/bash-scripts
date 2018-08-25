@@ -8,5 +8,6 @@ apt:
   packages:
   - bats
   - bc
+  - httpie
 
 script: bats .
