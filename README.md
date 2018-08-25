@@ -1,6 +1,8 @@
 Bash scripts tool box
 ===
 
+![Build Status](https://travis-ci.org/chechiachang/bash-scripts.svg?branch=master)
+
 A bash scripts utilities collections
 
 # Usage

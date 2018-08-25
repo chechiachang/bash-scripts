@@ -2,16 +2,11 @@ language: generic
 
 sudo: enabled
 
-addons:
-  apt:
-    packages:
-      - cmake
+apt:
+  sources:
+  - sourceline: 'ppa:duggan/bats'
+  packages:
+  - bats
+  - bc
 
-before_install:
-  git clone https://github.com/sstephenson/bats.git ${HOME}/bats
-  cd ${HOME}/bats
-  ./install.sh /usr/local
-
-install:
-  make bats
-  
+script: bats .
