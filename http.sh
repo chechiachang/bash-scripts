@@ -15,6 +15,7 @@ httpie::get(){
 }
 
 httpie::post(){
-  declare url=$1 boby_file=$2 
-  http -v --check-status ${url} < ${body_file}
+  declare url=$1; shift
+  declare boby_file=$*
+  echo ${body_file} http -v --check-status ${url}
 }

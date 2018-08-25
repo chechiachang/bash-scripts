@@ -8,6 +8,6 @@ source http.sh
 }
 
 @test "httpie::post" {
-    echo {} | httpie::post http://httpbin.org/post
+    httpie::post http://httpbin.org/post {}
     [ $? = 0 ]
 }
