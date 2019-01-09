@@ -1,0 +1,19 @@
+kind: pipeline
+name: default
+
+steps:
+- name: backend
+  image: alpine:3.8
+  volumes:
+  - name: cache
+    path: /tmp/cache
+  commands:
+  - cd /tmp/cache
+  - git clone https://github.com/sstephenson/bats.git
+  - cd bats
+  - ./install.sh /usr/local
+
+volumes:
+- name: cache
+  host:
+    path: /var/lib/cache
