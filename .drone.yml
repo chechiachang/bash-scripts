@@ -1,19 +1,31 @@
+---
 kind: pipeline
-name: default
+name: go-1-11
+
+workspace:
+  base: /go
+  path: src/github.com/octocat/hello-world
 
 steps:
-- name: backend
-  image: alpine:3.8
-  volumes:
-  - name: cache
-    path: /tmp/cache
+- name: test
+  image: golang:1.11
   commands:
-  - cd /tmp/cache
-  - git clone https://github.com/sstephenson/bats.git
-  - cd bats
-  - ./install.sh /usr/local
+  - go get
+  - go test
 
-volumes:
-- name: cache
-  host:
-    path: /var/lib/cache
+---
+kind: pipeline
+name: go-1-10
+
+workspace:
+  base: /go
+  path: src/github.com/octocat/hello-world
+
+steps:
+- name: test
+  image: golang:1.10
+  commands:
+  - go get
+  - go test
+
+---
