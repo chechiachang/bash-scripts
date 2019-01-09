@@ -30,6 +30,20 @@ kubectl::pod::get(){
 
 }
 
+kubectl::pod::wait(){
+
+  for counter in $(seq 1 10); do
+    pending_pod_names=$(kubectl get pod --field-selector=status.phase=Pending -o=go-template="{{range .items}}{{.metadata.name}}{{end}}")
+    if [[ ${pending_pod_names} == "" ]]; then
+      echo "No pending pods" && exit 0
+    fi
+    echo "Wait for Pending pods...${counter}" && sleep 5
+  done
+  echo "Timeout waiting for Pending pods." && exit 1
+
+}
+
+
 kubectl::busybox::apply(){
 
 cat <<EOF | kubectl create -f -
