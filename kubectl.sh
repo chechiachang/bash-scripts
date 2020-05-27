@@ -28,6 +28,8 @@ kubectl::pod::get(){
   declare pod_name=$1
   kubectl get pod -o json | jq -r '.items[] | select( .metadata.name | contains("'${pod_name}'")) | .metadata.name'
 
+  kubectl get pv --sort-by='-{.metadata.creationTimestamp}'
+
 }
 
 kubectl::pod::wait(){
