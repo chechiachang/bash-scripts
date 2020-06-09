@@ -17,3 +17,4 @@ httpie::get http://httpbin.org/get
 # TODO
 
 - [ ] Check dependent scripts
+- [ ] Add mac / linux compatible shell
