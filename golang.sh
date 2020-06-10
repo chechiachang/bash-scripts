@@ -20,5 +20,5 @@ golang::govendor::install(){
 }
 
 golang::gocode:install(){
-  go get -u github.com/nsf/gocode
+  go get -u github.com/mdempsky/gocode
 }
