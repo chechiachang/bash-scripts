@@ -1,4 +1,5 @@
 SUBDIRS := $(filter-out modules/. templates/., $(wildcard */.))
+SHELL := /bin/bash
 
 bats:
 	bats .
