@@ -1,3 +1,5 @@
+SUBDIRS := $(filter-out modules/. templates/., $(wildcard */.))
+
 bats:
 	bats .
 
@@ -12,5 +14,6 @@ sed-inplace:
 # Shell parameter extension
 # VAR=one-one-two-three make variable
 variable:
+	echo $(SUBDIRS)
 	echo $${VAR}
 	echo $${VAR#*-}
