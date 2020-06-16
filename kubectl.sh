@@ -45,6 +45,19 @@ kubectl::pod::wait(){
 
 }
 
+kubectl::pod::delete_aged(){
+
+  DATE_LIMIT=$(date -d '-7 day' --utc "+%Y-%m-%dT%H:%M:%S")
+  NAMESPACE="default"
+  
+  kubectl --namespace ${NAMESPACE} \
+    get pods \
+    --field-selector=status.phase!=Running \
+    -o go-template --template '{{range .items}}{{.metadata.name}} {{.metadata.creationTimestamp}}{{"\n"}}{{end}}' \
+    | awk -v day="${DATE_LIMIT}" '$2 <= $day { print $1 }' \
+    | xargs --no-run-if-empty kubectl --namespace ${NAMESPACE} delete pod
+
+}
 
 kubectl::busybox::apply(){
 
