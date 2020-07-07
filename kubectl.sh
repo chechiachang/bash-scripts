@@ -89,3 +89,7 @@ kubectl::service::debug(){
   kubectl exec -it busybox-tool nslookup ${service_name}
 
 }
+
+kubectl::crd::finalizer(){
+  kubectl patch crd clusters.ceph.rook.io -p '{"metadata":{"finalizers": []}}' --type=merge
+}
