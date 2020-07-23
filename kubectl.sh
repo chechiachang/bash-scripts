@@ -93,3 +93,10 @@ kubectl::service::debug(){
 kubectl::crd::finalizer(){
   kubectl patch crd clusters.ceph.rook.io -p '{"metadata":{"finalizers": []}}' --type=merge
 }
+
+kubectl::ns::finalizer(){
+  kubectl proxy &
+  kubectl get ns delete-me -o json | \
+    jq '.spec.finalizers=[]' | \
+    curl -X PUT http://localhost:8001/api/v1/namespaces/delete-me/finalize -H "Content-Type: application/json" --data @-
+}
