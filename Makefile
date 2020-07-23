@@ -6,10 +6,13 @@ bats:
 
 # Shell variable: Always use $$ escape $ so that make won't try to expend VAR
 
+var-required:
+	if [ -z ${VAR} ]; then echo 'VAR env is required.' && exit 1; fi
+
 # VAR=new-text make sed
-sed:
+sed: var-required
 	sed -e "s!TEXT_TO_REPLACE!$${VAR}!g" text
-sed-inplace:
+sed-inplace: var-required
 	sed -i '' -e  "s!TEXT_TO_REPLACE!$${VAR}!g" text
 
 # Shell parameter extension
