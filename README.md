@@ -5,6 +5,8 @@ Bash scripts tool box
 
 A bash scripts utilities collections
 
+[Google Style Guide](https://google.github.io/styleguide/shellguide.html)
+
 # Usage
 
 ```
