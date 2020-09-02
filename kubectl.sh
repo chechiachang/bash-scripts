@@ -100,3 +100,7 @@ kubectl::ns::finalizer(){
     jq '.spec.finalizers=[]' | \
     curl -X PUT http://localhost:8001/api/v1/namespaces/delete-me/finalize -H "Content-Type: application/json" --data @-
 }
+
+kubectl::pod::delete_evicted(){
+  kubectl delete pod -A --field-selector="status.phase==Failed"
+}
